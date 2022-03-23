@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto+Mono:wght@200;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,700;1,800&display=swap');
+
+/*
+################
+CONTENTS
+================
+[1.1] 
+
+[2.1] DASHBOARD
+[2.2] HEADER
+
+[3.1] DRONES
+
+*/
+
+$content-width: 1400px;
+
+
+/*
+#####################
+## [2.1] DASHBOARD ##
+#####################
+*/
+
+.main-container {
+  display: block;
+  width: $content-width;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Open Sans', sans-serif;
+   
+  h1 {
+    font-weight: 700;
+  }
+}
+
+/*
+##################
+## [2.2] HEADER ##
+##################
+*/
+
+.header {
+  display: block;
+  width: 100%;
+  background-color:rgb(50, 64, 141);
+  color: white;
+  
+  .header-content-container {
+    display: block;
+    width: $content-width;
+    max-width: 100%;
+    margin: auto;
+    padding: 20px
+  }
+
+  .header-content {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      h2 {
+        margin: 0;
+        font-family: 'Fredoka One', cursive;
+      }
+    }
+  
+    .nav {
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+
+/*
+##################
+## [3.1] DRONES ##
+##################
+*/
+
+.drones {
+
+  .drone-container {
+
+    background-color:#ccc;
+    border-radius: 30px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    
+    .drone {
+      display: block;
+      padding: 20px;
+      margin-bottom: 20px;
+      font-family: 'Roboto Mono', monospace;
+
+      span {
+        padding: 10px;
+      }
+
+      .drone-ico {
+        height: 30px;
+        margin-right: 10px;
+      }
+
+      .battery-img {
+        transform: rotate(-90deg);
+        height: 26px;
+      }
+
+      .task-progress {
+        display: inline-block;
+        width: 30%;
+      }
+    }
+  }
+}
+
+.map-container {
+  height: 500px;
+
+  .dot {
+    height: 25px;
+    width: 25px;
+    background-color: rgb(196, 76, 76);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .drone-ico {
+    height: 30px;
+  }
+}
+
+
+.coords-table {
+  table {
+    border-collapse: collapse;
+  }
+
+  td, th {
+    padding: 3px 20px 3px 3px;
+    border: 1px solid black;
+  }
+}
