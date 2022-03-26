@@ -22,19 +22,19 @@ const Battery = ({battery}) => {
 }
 
 const Drone = ({drone}) => {
-    let prog = getRandomIntInclusive(0,100);
-    let bat = getRandomIntInclusive(0,100);
+    // let prog = getRandomIntInclusive(0,100);
+    // let bat = getRandomIntInclusive(0,100);
     return (
         <div className="drone-container">
             <div className="drone">
                 <img className="drone-ico" src="./drone.png" alt="mini drone"/>
                 <span>ID: {drone.id}</span>
                 <span>|</span>
-                {/* <span>{drone.battery}%  <Battery battery={drone.battery}/></span> */}
-                <span>{bat}%  <Battery battery={bat}/></span>
+                <span>{drone.battery}%  <Battery battery={drone.battery}/></span>
+                {/* <span>{bat}%  <Battery battery={bat}/></span> */}
                 <span>|</span>
-                {/* <span><ProgressBar className="task-progress" animated now={drone.task_progress} label={`${drone.task_progress}%`} /></span> */}
-                <span><ProgressBar className="task-progress" animated now={prog} label={`${prog}%`} /></span>
+                <span><ProgressBar className="task-progress" animated now={drone.task_progress} label={`${drone.task_progress}%`} /></span>
+                {/* <span><ProgressBar className="task-progress" animated now={prog} label={`${prog}%`} /></span> */}
             </div>
         </div>
     )

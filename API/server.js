@@ -7,6 +7,7 @@ import { Server }   from 'socket.io';
 import db           from './app/models/index.js';
 import DroneRoutes  from './app/routes/drone.routes.js';
 import ProjectRoutes  from './app/routes/project.routes.js';
+
 const app           = express()
 const port = 3001
 
@@ -49,6 +50,7 @@ const Drone = db.drone;
 const DroneType = db.droneType;
 const Client = db.client;
 const Project = db.project;
+const Task = db.task;
 
 db.sequelize.sync({force: true}).then(() => {
   console.log('Drop and Resync Db');
@@ -105,7 +107,7 @@ function initial() {
     Drone.create(
       {
         id: "D079",
-        battery: 89,
+        battery: 43,
         type: "Large Surveyor",
         allocation: 1
     }).then(() => {
@@ -123,6 +125,22 @@ function initial() {
       })
     }).catch(err => {
       console.log(err)
+    })
+  })
+  .then(() => {
+    Task.create({
+      droneId: "D080",
+      name: "Initial Survey",
+      desc: "Drone 2 of 4 completing the survey",
+      isActive: true,
+      progress: 78,
+    })
+    Task.create({
+      droneId: "D079",
+      name: "Spraying some shiz",
+      desc: "Spraying crops that are showing signs of mildew",
+      isActive: true,
+      progress: 78,
     })
   })
   

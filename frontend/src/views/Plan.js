@@ -2,11 +2,11 @@ import React from "react";
 import { Route, Routes } from 'react-router-dom';
 import { StateMachineProvider, createStore } from "little-state-machine";
 import { Container, Row, Col }          from 'react-bootstrap';
-import Step1 from "./Step1";
-import Step2 from "./Step2";
-import Step3 from "./Step3";
-import Result from "./Result"
-import Header from "./Header";
+import Step1 from "../components/Step1";
+import Step2 from "../components/Step2";
+import Step3 from "../components/Step3";
+import Result from "../components/Result"
+import Header from "../components/Header";
 
 createStore({});
 

@@ -3,6 +3,7 @@ import db from "../models/index.js";
 const Location = db.location;
 const Project = db.project;
 const Drone = db.drone;
+const Task = db.task;
 
 const sendLocation = (req, res) => {
     Location.findOne({
@@ -30,9 +31,15 @@ const sendDrones = (req, res) => {
         where: {
             allocation: req.params.project
         },
-        include: {
+        include: [{
             model: Location
-        }
+        },
+        {
+            model: Task,
+            where: {
+                isActive: true
+            }
+        }]
     })
     .then(drone => {
         if (!drone) {

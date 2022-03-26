@@ -1,7 +1,6 @@
 import React  from 'react';
 import Drone from './Drone'
 
-
 const Drones = ({drones}) => {
     return (
         <div className="drones">

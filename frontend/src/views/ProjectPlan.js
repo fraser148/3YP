@@ -1,6 +1,6 @@
 import React, { useEffect, useState }   from 'react';
-import Header                           from './Header';
-import MapInit                          from './MapInit';
+import Header                           from '../components/Header';
+import MapInit                          from '../components/MapInit';
 import { useForm  }                     from 'react-hook-form';
 import { getDrones, getAvailable }      from '../services/getDrones';
 import { getSetup }                     from '../services/getSetup';

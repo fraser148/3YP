@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Dashboard from './Dashboard';
-import Topography from './Topography';
+import Topography from '../components/Topography';
 import ProjectPlan from './ProjectPlan';
 import Plan from './Plan'
 

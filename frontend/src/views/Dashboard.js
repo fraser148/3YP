@@ -1,7 +1,7 @@
 import React, { useEffect, useState }    from 'react';
-import Header   from './Header';
-import Drones   from './Drones';
-import Map      from './Map';
+import Header   from '../components/Header';
+import Drones   from '../components/Drones';
+import Map      from '../components/Map';
 import { getDrones } from '../services/getDrones';
 import { Container, Row, Col }   from 'react-bootstrap';
 
@@ -11,13 +11,13 @@ const Dashboard = () => {
     useEffect(() => {
         let mounted = true;
         getDrones(1)
-          .then(drones=> {
-            if(mounted) {
-              setDrones(drones.drones)
-            }
-          })
+            .then(drones=> {
+                if(mounted) {
+                    setDrones(drones.drones)
+                }
+            })
         return () => mounted = false;
-      }, [])
+    }, [])
 
     return (
         <div className="dashboard">

@@ -57,7 +57,7 @@ const Step3 = (props) => {
     </table>
     <span>{area.toFixed(3)}m<sup>2</sup></span>
   </form>
-    <pre>{JSON.stringify(state, null, 2)}</pre>
+    {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
     </>
     
   );

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useStateMachine } from "little-state-machine";
 import updateAction from "../services/updateAction";
 
 const Result = () => {
   const {  state } = useStateMachine({ updateAction });
+  
+  useEffect(() => {
+    console.log(state)
+  })
 
   return (
     <>

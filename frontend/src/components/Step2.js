@@ -46,7 +46,7 @@ const Step2 = (props) => {
           </tr> */}
           <tr>
               <td><span className="form_number">Time Limit (hours)</span></td>
-              <td><input  {...register("time")} type="number" min={1} /></td>
+              <td><input  {...register("time", {required: true})} type="number" min={1} /></td>
           </tr>
           <tr>
             <td>
@@ -56,7 +56,7 @@ const Step2 = (props) => {
       </tbody>
   </table>
   </form>
-    <pre>{JSON.stringify(state, null, 2)}</pre>
+    {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
     </>
     
   );
