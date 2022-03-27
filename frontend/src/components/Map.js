@@ -1,14 +1,26 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ id }) => {
-    return (
-        <div>
-            <img className="drone-ico" src="./drone.png" alt="mini drone"/>
-            <span>{id}</span>
-        </div>
-        
-    )
+const AnyReactComponent = ({ id, index, selected }) => {
+    if (selected === index) {
+        return (
+            <div>
+                <img className="drone-ico" src="./drone-selected.png" alt="mini drone"/>
+                <span>{id}</span>
+            </div>
+            
+        )
+    } else {
+        return (
+            <div>
+                <img className="drone-ico" src="./drone.png" alt="mini drone"/>
+                <span>{id}</span>
+            </div>
+            
+        )
+
+    }
+
 };
 
 const handleApiLoaded = (map, maps) => {
@@ -39,7 +51,7 @@ const handleApiLoaded = (map, maps) => {
     bermudaTriangle.setMap(map);
 }
 
-const Map = ({ drones }) => {
+const Map = ({ drones, selected }) => {
 
     const center = {
         lat: 51.75377600289503,
@@ -58,11 +70,13 @@ const Map = ({ drones }) => {
                 yesIWantToUseGoogleMapApiInternals
                 onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
             >
-            {drones.map((drone) => (
+            {drones.map((drone, index) => (
                 <AnyReactComponent
                     lat={drone.location.lat}
                     lng={drone.location.lng}
                     id={drone.id}
+                    index={index}
+                    selected={selected}
                 />
             ))}
                 

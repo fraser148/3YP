@@ -5,6 +5,7 @@ import Dashboard from './Dashboard';
 import Topography from '../components/Topography';
 import ProjectPlan from './ProjectPlan';
 import Plan from './Plan'
+import Survey from './Survey';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/topography" element={<Topography />}/>
         <Route path="/plan" element={<ProjectPlan />}/>
         <Route path="/planner/*" element={<Plan />}/>
+        <Route path="/survey" element={<Survey />}/>
       </Routes>
     </div>
   );

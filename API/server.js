@@ -133,7 +133,7 @@ function initial() {
       name: "Initial Survey",
       desc: "Drone 2 of 4 completing the survey",
       isActive: true,
-      progress: 78,
+      progress: 56,
     })
     Task.create({
       droneId: "D079",

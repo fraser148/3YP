@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useStateMachine } from "little-state-machine";
-import { getAvailable }      from '../services/getDrones';
+// import { getAvailable }      from '../services/getDrones';
 import updateAction from "../services/updateAction";
 
 const Step2 = (props) => {
   const { register, handleSubmit } = useForm();
-  const [max_drones, setMax_drones] = useState(0)
+  // const [max_drones, setMax_drones] = useState(0)
   const { actions, state } = useStateMachine({ updateAction  });
   let navigate = useNavigate();
   const onSubmit = (data) => {
@@ -15,16 +15,16 @@ const Step2 = (props) => {
     navigate("../step3");
   };
 
-  useEffect(() => {
-    let mounted = true;
-    getAvailable()
-        .then(details => {
-            if (mounted) {
-                setMax_drones(details.drones)
-            }
-        });
-    return () => mounted = false;
-  }, [])
+  // useEffect(() => {
+  //   let mounted = true;
+  //   getAvailable()
+  //       .then(details => {
+  //           if (mounted) {
+  //               setMax_drones(details.drones)
+  //           }
+  //       });
+  //   return () => mounted = false;
+  // }, [])
 
 
   return (

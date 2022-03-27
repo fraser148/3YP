@@ -1,12 +1,22 @@
 import React  from 'react';
 import Drone from './Drone'
 
-const Drones = ({drones}) => {
+const Drones = ({drones, setSelected}) => {
     return (
         <div className="drones">
-            {drones.map((drone) => (
-                <Drone drone={drone} />
-            ))}
+            <table>
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <th>Battery</th>
+                        <th>Progress</th>
+                    </tr>
+                    {drones.map((drone, index) => (
+                        <Drone drone={drone} customClick={() => setSelected(index)} />
+                    ))}
+                </tbody>
+            </table>
+            
             
         </div>
     )

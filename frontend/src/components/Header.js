@@ -7,13 +7,13 @@ const Header = () => {
             <div className="header-content-container">
             <div className="header-content">
                 <div className="title">
-                    <h2>VITI</h2>
+                    <Link to="/"><img src={"./logo.png"} alt="main logo"/></Link>
                 </div>
                 <div className="nav">
-                    <Link to="/about">ABOUT</Link>
-                    <Link to="/plan">OLD PLANNER</Link>
-                    <Link to="/planner">PLAN</Link>
-                    <Link to="/about">ABOUT</Link>
+                    <Link to="/">old planner</Link>
+                    <Link to="/plan">old planner</Link>
+                    <Link to="/planner">plan</Link>
+                    <Link to="/survey">survey</Link>
                 </div>
             </div>
             </div>

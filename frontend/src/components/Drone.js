@@ -7,6 +7,23 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min; // max & min both included 
   }
 
+const forget = ({drone, customClick, index}) => {
+    return (
+        <div className="drone-container" onClick={customClick}>
+        <div className="drone">
+            <img className="drone-ico" src="./drone.png" alt="mini drone"/>
+            <span>ID: {drone.id}</span>
+            <span>|</span>
+            <span>{drone.battery}%  <Battery battery={drone.battery}/></span>
+            {/* <span>{bat}%  <Battery battery={bat}/></span> */}
+            <span>|</span>
+            <span><ProgressBar className="task-progress" animated now={drone.task.progress} label={`${drone.task.progress}%`} /></span>
+            {/* <span><ProgressBar className="task-progress" animated now={prog} label={`${prog}%`} /></span> */}
+        </div>
+    </div>
+    )
+}
+
 const Battery = ({battery}) => {
     if (battery >= 90) {
         return <img className="battery-img" src="./full-battery.png" alt="full battery"/>
@@ -21,23 +38,16 @@ const Battery = ({battery}) => {
     }
 }
 
-const Drone = ({drone}) => {
+const Drone = ({drone, customClick, index}) => {
     // let prog = getRandomIntInclusive(0,100);
     // let bat = getRandomIntInclusive(0,100);
     return (
-        <div className="drone-container">
-            <div className="drone">
-                <img className="drone-ico" src="./drone.png" alt="mini drone"/>
-                <span>ID: {drone.id}</span>
-                <span>|</span>
-                <span>{drone.battery}%  <Battery battery={drone.battery}/></span>
-                {/* <span>{bat}%  <Battery battery={bat}/></span> */}
-                <span>|</span>
-                <span><ProgressBar className="task-progress" animated now={drone.task_progress} label={`${drone.task_progress}%`} /></span>
-                {/* <span><ProgressBar className="task-progress" animated now={prog} label={`${prog}%`} /></span> */}
-            </div>
-        </div>
+        <tr onClick={customClick}>
+            <td>{drone.id}</td>
+            <td>{drone.battery}% <Battery battery={drone.battery}/></td>
+            <td><span><ProgressBar className="task-progress" animated now={drone.task.progress} label={`${drone.task.progress}%`} /></span></td>
+        </tr>
     )
 }
 
-export default Drone
+export default Drone;

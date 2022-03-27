@@ -9,8 +9,9 @@ const Step1 = (props) => {
   const [center, setCenter] = useState([51.75423118080835,-1.2565135404143575])
   const [boundary, setBoundary] = useState([])
   const [setup, setSetup] = useState({drones: [], clients: []})
+  const [loading, setLoading] = useState(true);
 
-  const { actions, state } = useStateMachine({ updateAction });
+  const { actions } = useStateMachine({ updateAction });
   let navigate = useNavigate();
   const onSubmit = (data) => {
     data.center = center
@@ -35,6 +36,7 @@ const Step1 = (props) => {
             if (mounted) {
                 setSetup(details);
                 console.log(details)
+                setLoading(false);
             }
         })
     return () => mounted = false;
@@ -76,6 +78,24 @@ const Step1 = (props) => {
         )}
         <button type="submit">Submit</button>
     </form>
+    
+      {!loading &&
+
+      <>
+        <h3>Address</h3>
+        <p>{setup.clients[watchClient-1].address1}</p>  
+        <p>{setup.clients[watchClient-1].address2}</p>  
+        <p>{setup.clients[watchClient-1].postcode}</p> 
+
+        <h3>Details</h3>
+        <p>Name: {setup.clients[watchClient-1].name}</p>
+        <p>Email: {setup.clients[watchClient-1].email}</p>
+      </>
+
+
+      
+      }
+    
     {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
     </>
     
