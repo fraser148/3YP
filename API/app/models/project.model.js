@@ -9,6 +9,9 @@ const Project = (sequelize, Sequelize) => sequelize.define("projects", {
     },
     active: {
         type: Sequelize.BOOLEAN
+    },
+    area: {
+        type: Sequelize.FLOAT
     }
 });
 

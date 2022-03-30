@@ -17,7 +17,7 @@ const Step1 = (props) => {
     data.center = center
     data.boundary = boundary
     actions.updateAction(data);
-    navigate("./step2");
+    navigate("./step3");
   };
 
   const { register, watch, formState: { errors }, handleSubmit } = useForm({
@@ -76,6 +76,7 @@ const Step1 = (props) => {
             This field is required
             </span>
         )}
+        <input  {...register("time", {required: true})} type="number" min={1} />
         <button type="submit">Submit</button>
     </form>
     

@@ -10,8 +10,8 @@ const Header = () => {
                     <Link to="/"><img src={"./logo.png"} alt="main logo"/></Link>
                 </div>
                 <div className="nav">
-                    <Link to="/">old planner</Link>
-                    <Link to="/plan">old planner</Link>
+                    <Link to="/">Dashboard</Link>
+                    {/* <Link to="/plan">old planner</Link> */}
                     <Link to="/planner">plan</Link>
                     <Link to="/survey">survey</Link>
                 </div>

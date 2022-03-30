@@ -11,6 +11,8 @@ const ProjectRoutes = (app) => {
 
   app.get("/api/setup", controller.getSetup);
   app.get("/api/available", controller.getAvailable);
+  app.post("/api/project/create", controller.createProject);
+  app.post("/api/project2/route", controller.getRoute);
 
 };
 
