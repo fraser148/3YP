@@ -9,7 +9,7 @@ Running the server in development:
 npm run dev
 ```
 ## Some Endpoints
-- `GET` /api/drone/location/:id
+- `GET /api/drone/location/:id`
 
 Returns the location of the drone with the parameter `ID`
 
