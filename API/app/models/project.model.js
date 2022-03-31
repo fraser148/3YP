@@ -22,17 +22,17 @@ const Project = (sequelize, Sequelize) => sequelize.define("projects", {
     surveyPath: {
         type: Sequelize.GEOMETRY('LINESTRING')
     },
-    intialDiseased: {
+    initialDiseased: {
         type: Sequelize.FLOAT,
         allowNull: false,
-        defaultValue: 23
+        defaultValue: 14
     },
-    intialHealthy: {
+    initialHealthy: {
         type: Sequelize.FLOAT,
         allowNull: false,
-        defaultValue:27
+        defaultValue:17
     },
-    intialUnhealthy: {
+    initialUnhealthy: {
         type: Sequelize.FLOAT,
         allowNull: false,
         defaultValue: 51

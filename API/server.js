@@ -1,12 +1,13 @@
-import bodyParser   from "body-parser";
-import express      from 'express';
-import cors         from 'cors';
-import http         from 'http'
-import dotenv       from 'dotenv';
-import { Server }   from 'socket.io';
-import db           from './app/models/index.js';
-import DroneRoutes  from './app/routes/drone.routes.js';
+import bodyParser     from "body-parser";
+import express        from 'express';
+import cors           from 'cors';
+import http           from 'http'
+import dotenv         from 'dotenv';
+import { Server }     from 'socket.io';
+import db             from './app/models/index.js';
+import DroneRoutes    from './app/routes/drone.routes.js';
 import ProjectRoutes  from './app/routes/project.routes.js';
+import websockets     from './websockets/index.js';
 
 const app           = express()
 const port = 3001
@@ -45,6 +46,8 @@ app.use(express.static('app/static'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+websockets(app);
+
 const Location = db.location;
 const Drone = db.drone;
 const DroneType = db.droneType;
@@ -73,12 +76,12 @@ function initial() {
       client_lat: 51.75377600289503,
       client_lng: -1.2560615958119348
     },{
-      name: "Fraser Vineyards",
+      name: "Ipek Vineyards",
       address1: "Jesus College",
       address2: "Turl Street",
       country: "United Kingdom",
       postcode: "OX1 4HG",
-      email: "fraser@exeter.ox.ac.uk",
+      email: "ipek@exeter.ox.ac.uk",
       client_lat: 51.75312857353553,
       client_lng: -1.2509756228250952
     },

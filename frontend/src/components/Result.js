@@ -77,7 +77,7 @@ const Result = () => {
         xs.push(element[0]);
         ys.push(element[1]);
       });
-      let body = {xs, ys, center: state.center, client: state.client};
+      let body = {xs, ys, center: state.center, projectId: state.projectId};
       console.log(body)
       let response = await axios.post("http://localhost:3001/api/project2/route", body)
       setDatapoints(response.data.points);
@@ -99,7 +99,7 @@ const Result = () => {
         <Col md={6}>{!loading &&
           <Scatter options={options} data={data} />
       }
-          <Link to={"./../../dashboard/project/" + project}>VIEW IN Dashboard</Link>
+          <Link to={"./../../dashboard/project/" + state.projectId}>VIEW IN Dashboard</Link>
         </Col>
       </Row>
     </Container>

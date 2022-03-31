@@ -1,7 +1,6 @@
 import React, { useEffect, useState }    from 'react';
 import Header   from '../components/Header';
 import Drones   from '../components/Drones';
-import Map      from '../components/Map';
 import PathMap      from '../components/PathMap';
 import { Container, Row, Col, ProgressBar }   from 'react-bootstrap';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -38,6 +37,7 @@ const Dashboard = () => {
     const [project, setProject] = useState();
     const [selected, setSelected] = useState(0);
     const [loading, setLoading] = useState(true);
+    const [datapoints, setDatapoints] = useState();
     let { id } = useParams();
 
     useEffect(() => {
@@ -45,37 +45,37 @@ const Dashboard = () => {
             const proj = await axios.get("http://localhost:3001/api/project/" + projectID);
             const dron = await axios.get('http://localhost:3001/api/project/drones/' + 1);
             setDrones(dron.data.drones)
-            console.log(dron.data.drones)
             setProject(proj.data.project)
-            console.log(proj.data.project)
+            const my = proj.data.project;
+            const pending = 100 - (my.initialDiseased + my.initialUnhealthy + my.initialHealthy)
+            setDatapoints([my.initialDiseased,my.initialUnhealthy,my.initialHealthy,pending])
             setLoading(false);
         };
         getProject(id);
-    }, [id])
+    }, [id]);
 
-
-    // const data = {
-    //     labels: ['Diseased', 'Unhealthy', 'Healthy', 'Pending'],
-    //     datasets: [
-    //       {
-    //         label: '# of Votes',
-    //         data: [project.intialDiseased, 2, 3, 7],
-    //         backgroundColor: [
-    //           'rgba(255, 99, 132, 0.2)',
-    //           'rgba(255, 206, 86, 0.2)',
-    //           'rgba(75, 192, 192, 0.2)',
-    //           'rgba(61, 96, 194, 0.205)'
-    //         ],
-    //         borderColor: [
-    //           'rgba(255, 99, 132, 1)',
-    //           'rgba(255, 206, 86, 1)',
-    //           'rgba(75, 192, 192, 1)',
-    //           'rgba(61, 96, 194, 1)'
-    //         ],
-    //         borderWidth: 1,
-    //       },
-    //     ],
-    //   };
+    const data = {
+        labels: ['Diseased', 'Unhealthy', 'Healthy', 'Pending'],
+        datasets: [
+            {
+                label: 'NDVI Rating',
+                data: datapoints,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(61, 96, 194, 0.205)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(61, 96, 194, 1)'
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
 
     return (
         <div className="dashboard">

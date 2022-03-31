@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { Container, Row, Col  }   from 'react-bootstrap';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import ProjectList from "../components/ProjectList";
 
 const Projects = () => {
     const [loading, setLoading] = useState(true);
     const [clients, setClients] = useState();
     const [client, setClient] = useState();
     const [projects, setProjects] = useState();
-
-    const navigator = useNavigate();
 
     useEffect(() => {
         const getClients = async () => {
@@ -36,21 +34,7 @@ const Projects = () => {
         setProjects(myClients.data.projects);
     }
 
-    const formatDate = (date) => {
-        return new Date(date).toLocaleDateString(
-            'en-gb',
-            {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              timeZone: 'utc'
-            }
-        ); 
-    }
 
-    const handleRowClick = (row) => {
-        navigator("/dashboard/project/" + row)
-    }
 
     return (
         <div className="dashboard">
@@ -77,31 +61,11 @@ const Projects = () => {
                                         </div>
                                     }
                                     {projects &&
-                                    <>
-                                    <h3>Projects</h3>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Start Date</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        
-                                            {projects.map(project => (
-                                                <tr onClick={()=> handleRowClick(project.id)}>
-                                                    <td>{project.id}</td>
-                                                    <td>{project.name}</td>
-                                                    <td>{formatDate(project.startDate)}</td>
-                                                    <td>{project.status}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                    <Link to={"../plan/step1/" + client}>Create a project</Link>
-                                    </>
-                                    }
-                                    
+                                        <ProjectList
+                                            projects={projects}
+                                            client={client}
+                                        />   
+                                    }                                
 
                             </div>
                             

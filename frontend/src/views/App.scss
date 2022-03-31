@@ -257,6 +257,17 @@ $content-width: 1400px;
     .projects {
       text-align: center;
 
+      .create {
+        display: inline-block;
+        padding: 10px 16px;
+        background-color: #DBEDDB;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        color: rgb(43, 43, 43);
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+
       select {
         width: 500px;
         max-width: 100%;
@@ -277,10 +288,17 @@ $content-width: 1400px;
         text-align: left;
 
         $border-color: #ccc;
-        $border-width: 2px;
+        $border-width: 1px;
 
         td, th {
           padding: 2px 9px;
+        }
+
+        .status {
+          padding: 0px 10px 1px 10px;
+          display: inline-block;
+          border-radius: 20px;
+          color: #313131d2;
         }
 
         tr {
@@ -289,7 +307,7 @@ $content-width: 1400px;
 
         th {
           cursor:default;
-          font-weight: 400;
+          font-weight: 200;
           color:#757575;
         }
 

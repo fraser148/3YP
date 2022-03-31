@@ -37,6 +37,7 @@ const Step1 = (props) => {
   const onSubmit = (data) => {
     const cent = [client.client_lat,client.client_lng];
     data.center = cent;
+    data.client = client.id;
     const dx = 0.002;
     const dy = 0.001;
     const field = [

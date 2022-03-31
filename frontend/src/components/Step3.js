@@ -16,7 +16,7 @@ const Step3 = (props) => {
   const [boundary, setBoundary] = useState(state.boundary)
   let navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // Add boundary data to state
     data.boundary = boundary;
     const coordinates = [];
@@ -46,8 +46,7 @@ const Step3 = (props) => {
     data.coordinates = coordinates
 
     // Update state data
-    actions.updateAction(data);
-
+    
     const sending = {
       boundary: polygon,
       active: true,
@@ -57,8 +56,11 @@ const Step3 = (props) => {
       timeLimit: state.time,
       startDate: state.date
     }
-
-    axios.post("http://localhost:3001/api/project/create", sending);
+    
+    const project = await axios.post("http://localhost:3001/api/project/create", sending);
+    console.log(project);
+    data.projectId = project.data.projectId;
+    actions.updateAction(data);
 
     navigate("../result");
   };

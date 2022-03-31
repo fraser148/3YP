@@ -40,7 +40,7 @@ const createProject = async (req, res) => {
     try {
         console.log(req.body.boundary.coordinates)
         const { boundary, clientId, area, surveyName, timeLimit, startDate} = req.body;
-        Project.create({
+        const project = await Project.create({
             boundary,
             active: true,
             clientId,
@@ -49,7 +49,8 @@ const createProject = async (req, res) => {
             timeLimit,
             startDate
         });
-        res.status(200).send({message: "That worked"});
+        const projectId = project.id;
+        res.status(200).send({message: "That worked", projectId});
     } catch(err) {
         res.status(500).send("Error creating project.")
     }
@@ -215,13 +216,11 @@ const getRoute = async (req, res) => {
         }
         const PathDistance = distances.reduce((partialSum, a) => partialSum + a, 0);
         const surveyPath = {type: 'LineString', coordinates: coords}
-        const clientId = req.body.client;
-        const project = await Project.findOne({where: {clientId}});
-        const projectId = project.dataValues.id;
-        console.log(projectId);
+        const projectId = req.body.projectId;
+        const project = await Project.findOne({where: {id: projectId}});
         await project.set({surveyPath});
         project.save();
-        res.status(200).send({points, PathDistance, projectId});
+        res.status(200).send({points, PathDistance});
       } catch (e) {
         console.error('Error during script execution ', e.stack);
         res.status(500).send({e});
