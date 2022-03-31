@@ -12,7 +12,7 @@ const Drones = ({drones, setSelected}) => {
                         <th>Progress</th>
                     </tr>
                     {drones.map((drone, index) => (
-                        <Drone drone={drone} customClick={() => setSelected(index)} />
+                        <Drone index={index} key={index} drone={drone} customClick={() => setSelected(index)} />
                     ))}
                 </tbody>
             </table>

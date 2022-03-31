@@ -17,17 +17,13 @@ function Plan() {
         <Header />
         <div className="main-container">
           <Container>
-            <Row>
-              <Col sm={12} lg={12} md={12}>
-                <h1>Plan Project</h1>
-                <Routes>
-                  <Route exact path="/" element={<Step1/>} />
-                  <Route exact path="/step2" element={<Step2 />} />
-                  <Route exact path="/step3" element={<Step3 />} />
-                  <Route exact path="/result" element={<Result />} />
-                </Routes>
-              </Col>
-            </Row>
+            <h1>Plan Project</h1>
+            <Routes>
+              <Route path="/step1/:clientID" element={<Step1/>} />
+              <Route path="/step2" element={<Step2 />} />
+              <Route path="/step3" element={<Step3 />} />
+              <Route path="/result" element={<Result />} />
+            </Routes>
           </Container>
         </div>
       </div>

@@ -4,6 +4,7 @@ const Location = db.location;
 const Project = db.project;
 const Drone = db.drone;
 const Task = db.task;
+const Client = db.client;
 
 const sendLocation = (req, res) => {
     Location.findOne({
@@ -58,15 +59,19 @@ const getProject = (req, res) => {
     Project.findOne({
         where: {
             id: req.params.project
-        }
+        },
+        include: [
+            { model: Client }
+        ]
     })
     .then(project => {
         if(!project) {
             res.status(404).send("Project not found")
-        }
-        res.status(200).send({
+        } else {
+            res.status(200).send({
             project: project
         })
+    }
         
     })
     .catch(err => {

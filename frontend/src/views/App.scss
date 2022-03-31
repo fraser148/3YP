@@ -224,3 +224,150 @@ $content-width: 1400px;
     border: 1px solid black;
   }
 }
+
+// HOME
+
+.main-container {
+  &.home {
+    padding: 0px;
+    width:100%;
+  }
+}
+
+.main-content {
+  &.home {
+
+    .container.main-full {
+      width: 100%;
+
+      img {
+        transform: scaleX(-1);
+        display: block;
+        max-width: 100%;
+        margin:auto;
+      }
+    }
+  }
+}
+
+// Projects
+
+.main-content {
+  &.select-project {
+    .projects {
+      text-align: center;
+
+      select {
+        width: 500px;
+        max-width: 100%;
+        background-color: rgb(252, 252, 252);
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 3px 6px;
+
+        &:focus{
+          outline:none;
+        }
+      }
+
+      table {
+        border-spacing: 0; 
+        border-collapse: separate;
+        margin:auto;
+        text-align: left;
+
+        $border-color: #ccc;
+        $border-width: 2px;
+
+        td, th {
+          padding: 2px 9px;
+        }
+
+        tr {
+          cursor: pointer;
+        }
+
+        th {
+          cursor:default;
+          font-weight: 400;
+          color:#757575;
+        }
+
+        td {
+          font-weight: 400;
+        }
+        
+        tr:first-child th:first-child {
+          border-left: $border-width solid $border-color;
+          border-top: $border-width solid $border-color;
+          border-top-left-radius: 10px;
+        }
+
+        tr:first-child th:last-child {
+          border-right: $border-width solid $border-color;
+          border-top: $border-width solid $border-color;
+          border-top-right-radius: 10px;
+        }
+        tr:last-child td:first-child {
+          border-left: $border-width solid $border-color;
+          border-bottom: $border-width solid $border-color;
+          border-bottom-left-radius: 10px;
+        }
+        tr:last-child td:last-child {
+          border-right: $border-width solid $border-color;
+          border-bottom: $border-width solid $border-color;
+          border-bottom-right-radius: 10px;
+        }
+
+        tr td:last-child {
+          border-right: $border-width solid $border-color;
+        }
+        tr td:first-child {
+          border-left: $border-width solid $border-color;
+        }
+
+        tr:last-child {
+          td {
+            border-bottom: $border-width solid $border-color
+          }
+        }
+        tr:first-child {
+          th {
+            border-top: $border-width solid $border-color
+          }
+        }
+
+      }
+    }
+  }
+}
+
+// SETUP
+
+
+.setup-form {
+  form{
+    display: block;
+    width: 300px;
+    max-width: 100%;
+    margin: auto;
+
+    input, label {
+      display: block;
+      width: 100%;
+    }
+
+  }
+}
+
+.client-details {
+  display: flex;
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .deets {
+    padding: 20px;
+  }
+}

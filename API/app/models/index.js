@@ -35,7 +35,8 @@ db.task = Task(sequelize, Sequelize);
 // Relationships
 db.droneType.hasMany(db.drone, { foreignKey: "type" });
 db.drone.hasOne(db.location);
-db.client.hasMany(db.project);
+db.project.belongsTo(db.client);
+// db.project.hasOne(db.client);
 db.project.hasMany(db.drone, { foreignKey: "allocation"});
 db.drone.hasOne(db.task);
 

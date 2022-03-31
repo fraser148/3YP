@@ -72,6 +72,7 @@ const Map = ({ drones, selected }) => {
             >
             {drones.map((drone, index) => (
                 <AnyReactComponent
+                    key={index}
                     lat={drone.location.lat}
                     lng={drone.location.lng}
                     id={drone.id}

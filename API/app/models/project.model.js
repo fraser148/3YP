@@ -25,24 +25,26 @@ const Project = (sequelize, Sequelize) => sequelize.define("projects", {
     intialDiseased: {
         type: Sequelize.FLOAT,
         allowNull: false,
-        defaultValue: 0
+        defaultValue: 23
     },
     intialHealthy: {
         type: Sequelize.FLOAT,
         allowNull: false,
-        defaultValue: 0
+        defaultValue:27
     },
     intialUnhealthy: {
         type: Sequelize.FLOAT,
         allowNull: false,
-        defaultValue: 0
+        defaultValue: 51
     },
     status: {
         type: Sequelize.STRING,
         defaultValue: "Not Started"
     },
     startDate:{
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: new Date()
     },
     stage: {
         type: Sequelize.STRING

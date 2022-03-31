@@ -41,8 +41,8 @@ app.use(cors({
   origin: "http://localhost:3000"
 }));
 
+app.use(express.static('app/static'))
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const Location = db.location;
@@ -73,12 +73,12 @@ function initial() {
       client_lat: 51.75377600289503,
       client_lng: -1.2560615958119348
     },{
-      name: "Ipek Vineyards",
+      name: "Fraser Vineyards",
       address1: "Jesus College",
       address2: "Turl Street",
       country: "United Kingdom",
       postcode: "OX1 4HG",
-      email: "ipek@exeter.ox.ac.uk",
+      email: "fraser@exeter.ox.ac.uk",
       client_lat: 51.75312857353553,
       client_lng: -1.2509756228250952
     },
@@ -135,6 +135,8 @@ function initial() {
       isActive: true,
       progress: 56,
     })
+  })
+  .then(()=> {
     Task.create({
       droneId: "D079",
       name: "Spraying some shiz",
