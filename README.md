@@ -20,3 +20,12 @@ Returns a list of all of the drones associated with a project and all of the det
 - `GET` /api/project/:project
 
 Returns all the details of a given project
+
+## References
+<a href="https://stackoverflow.com/">[1]</a>
+Stackoverflow
+
+<a href="https://cheatcode.co/tutorials/how-to-set-up-a-websocket-server-with-node-js-and-express#creating-a-websocket-server">[2]</a>
+How to Set Up a Websocket Server with Node.js and Express.
+Ryan Glover.
+June 1st, 2021

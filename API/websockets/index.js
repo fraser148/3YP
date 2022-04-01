@@ -1,8 +1,8 @@
-import WebSocket from "ws";
+import{ WebSocketServer }  from "ws";
 import queryString from "query-string";
 
-const websockets = async (expressServer) => {
-  const websocketServer = new WebSocket.Server({
+export default async (expressServer) => {
+  const websocketServer = new WebSocketServer({
     noServer: true,
     path: "/websockets",
   });
@@ -33,5 +33,3 @@ const websockets = async (expressServer) => {
 
   return websocketServer;
 };
-
-export default websockets;

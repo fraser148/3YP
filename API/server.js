@@ -46,8 +46,6 @@ app.use(express.static('app/static'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-websockets(app);
-
 const Location = db.location;
 const Drone = db.drone;
 const DroneType = db.droneType;
@@ -157,6 +155,8 @@ function initial() {
 DroneRoutes(app);
 ProjectRoutes(app);
 
-app.listen(port, () => {
+const server2 = app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+
+websockets(server2);
