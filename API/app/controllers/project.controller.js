@@ -1,11 +1,14 @@
 import db from "../models/index.js";
 import child_process from "child_process";
+import { connect } from "http2";
+import { Console } from "console";
 const spawn = child_process.spawn
 
 const Location = db.location;
 const Project = db.project;
 const Drone = db.drone;
 const Client = db.client;
+const Type = db.droneType;
 
 const getSetup = async (req, res) => {
     try {
@@ -39,14 +42,16 @@ const getAvailable = async (req, res) => {
 const createProject = async (req, res) => {
     try {
         console.log(req.body.boundary.coordinates)
-        const { boundary, clientId, area, surveyName, timeLimit, startDate} = req.body;
+        const { boundary, clientId, area, surveyName, time1, time2, time3, startDate} = req.body;
         const project = await Project.create({
             boundary,
             active: true,
             clientId,
             area,
             surveyName,
-            timeLimit,
+            survey1TimeLimit: time1,
+            survey2TimeLimit: time2,
+            sprayTimeLimit: time3,
             startDate
         });
         const projectId = project.id;
@@ -74,7 +79,7 @@ const getClientProjects = async (req, res) => {
     } catch(err) {
         res.status(500).send({message: "Error fetching projects"})
     }
-}
+};
 
 const getClient = async (req, res) => {
     try {
@@ -84,11 +89,25 @@ const getClient = async (req, res) => {
     } catch(err) {
         res.status(500).send({message: err})
     }
-}
+};
+
+const calcDrones = async (time, distance) => {
+    console.log(time);
+    const drones = await Type.findOne({where: {
+        type: "Large Surveyor"
+    }});
+    const {maxSpeed, flightTime } = drones.dataValues;
+    const pathTakes = distance / maxSpeed * 60 * 60 / 1000 // seconds
+    const maxTime = time * 60;
+    let NoDrones = pathTakes * pathTakes / flightTime / maxTime;
+    NoDrones = Math.ceil(NoDrones);
+    console.log(NoDrones);
+    return NoDrones
+};
 
 function run(ox, oy) {
     return new Promise((resolve, reject) => {
-        const process= spawn('python', ["C:/Users/fjren/GitProjects/GUI/path_planning/PathPlanner.py", ox, oy]);
+        const process = spawn('python', ["C:/Users/fjren/GitProjects/GUI/path_planning/PathPlanner.py", ox, oy]);
   
         const out = []
         process.stdout.on(
@@ -214,19 +233,45 @@ const getRoute = async (req, res) => {
             points.push({x : px[i], y: py[i]});
             coords.push([px[i]/10000+parseFloat(center[1]),  py[i]/10000+parseFloat(center[0])]);
         }
-        const PathDistance = distances.reduce((partialSum, a) => partialSum + a, 0);
-        const surveyPath = {type: 'LineString', coordinates: coords}
+        const pathDistance = distances.reduce((partialSum, a) => partialSum + a, 0);
+        const surveyPath = {type: 'LineString', coordinates: coords};
+        console.log(surveyPath);
         const projectId = req.body.projectId;
         const project = await Project.findOne({where: {id: projectId}});
-        await project.set({surveyPath});
+        const time1 = project.dataValues.survey1TimeLimit;
+        const survey1Drones = await calcDrones(time1, pathDistance);
+        await project.set({surveyPath, pathDistance, survey1Drones});
         project.save();
-        res.status(200).send({points, PathDistance});
-      } catch (e) {
+        res.status(200).send({points, pathDistance});
+    } catch (e) {
         console.error('Error during script execution ', e.stack);
         res.status(500).send({e});
-      }
+    }
 }
 
+const startProject = async (req, res) => {
+    try {
+        const { project } = req.params;
+        const p = await Project.findOne({where: {id: project}});
+        await p.set({
+            status: "In Progress",
+            stage: "Stage 1"
+        });
+        p.save();
+
+        await Drone.update({allocation: project},{
+            where: {
+                allocation: null
+            },
+            limit: p.dataValues.survey1Drones,
+            order: [['battery', 'DESC']],
+        });
+        
+        res.status(200).send({message: "Okay"})
+    } catch (err) {
+
+    }
+}
 
 export default {
     getSetup,
@@ -235,5 +280,6 @@ export default {
     getRoute,
     getClients,
     getClientProjects,
-    getClient
+    getClient,
+    startProject
 }

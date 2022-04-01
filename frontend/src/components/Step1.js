@@ -96,9 +96,15 @@ const Step1 = (props) => {
             <label>Start Date</label>
             <input  {...register("date", {required: true})} type="date" min={getMin()}/>
             {errors.date && errors.date.type === "required" && <span>This is required</span>}
-            <label>Time limit</label>
-            <input  {...register("time", {required: true})} type="number" min={1} />
-            {errors.time && errors.time.type === "required" && <span>This is required</span>}
+            <label>Survey 1 Time limit (mins)</label>
+            <input  {...register("time1", {required: true})} type="number" min={1} />
+            {errors.time1 && errors.time1.type === "required" && <span>This is required</span>}
+            <label>Survey 2 Time limit (mins)</label>
+            <input  {...register("time2", {required: true})} type="number" min={1} />
+            {errors.time2 && errors.time2.type === "required" && <span>This is required</span>}
+            <label>Spraying Time limit (mins)</label>
+            <input  {...register("time3", {required: true})} type="number" min={1} />
+            {errors.time3 && errors.time3.type === "required" && <span>This is required</span>}
             <button type="submit">Submit</button>
           </form>
         </div>

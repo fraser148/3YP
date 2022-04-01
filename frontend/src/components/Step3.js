@@ -53,7 +53,9 @@ const Step3 = (props) => {
       clientId: state.client,
       area: area,
       surveyName: state.name,
-      timeLimit: state.time,
+      time1: state.time1,
+      time2: state.time2,
+      time3: state.time3,
       startDate: state.date
     }
     

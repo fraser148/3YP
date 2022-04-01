@@ -7,7 +7,16 @@ const Project = (sequelize, Sequelize) => sequelize.define("projects", {
     surveyName: {
         type: Sequelize.STRING
     },
-    timeLimit:{
+    survey1TimeLimit:{
+        type: Sequelize.INTEGER
+    },
+    survey2TimeLimit:{
+        type: Sequelize.INTEGER
+    },
+    sprayTimeLimit:{
+        type: Sequelize.INTEGER
+    },
+    survey1Drones: {
         type: Sequelize.INTEGER
     },
     boundary: {
@@ -21,6 +30,9 @@ const Project = (sequelize, Sequelize) => sequelize.define("projects", {
     },
     surveyPath: {
         type: Sequelize.GEOMETRY('LINESTRING')
+    },
+    pathDistance: {
+        type: Sequelize.FLOAT
     },
     initialDiseased: {
         type: Sequelize.FLOAT,
@@ -47,7 +59,8 @@ const Project = (sequelize, Sequelize) => sequelize.define("projects", {
         defaultValue: new Date()
     },
     stage: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: "Stage 0"
     }
 });
 

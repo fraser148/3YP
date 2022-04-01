@@ -77,7 +77,7 @@ const Result = () => {
         xs.push(element[0]);
         ys.push(element[1]);
       });
-      let body = {xs, ys, center: state.center, projectId: state.projectId};
+      let body = {xs, ys, center: state.center, projectId: state.projectId, time1: state.time1, time2: state.time2, time3: state.time3};
       console.log(body)
       let response = await axios.post("http://localhost:3001/api/project2/route", body)
       setDatapoints(response.data.points);

@@ -1,36 +1,9 @@
 import React, { useEffect, useState }    from 'react';
-import Header   from '../components/Header';
-import Drones   from '../components/Drones';
-import PathMap      from '../components/PathMap';
-import { Container, Row, Col, ProgressBar }   from 'react-bootstrap';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
+import Header   from '../components/Header'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
-ChartJS.register(ArcElement, Tooltip, Legend);
-const data = {
-    labels: ['Diseased', 'Unhealthy', 'Healthy', 'Pending'],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [12, 2, 3, 7],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(61, 96, 194, 0.205)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(61, 96, 194, 1)'
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
+import Stage1 from '../components/Stage1';
+import Stage0 from '../components/Stage0';
 
 const Dashboard = () => {
     const [drones, setDrones] = useState([]);
@@ -43,9 +16,10 @@ const Dashboard = () => {
     useEffect(() => {
         const getProject = async (projectID) => {
             const proj = await axios.get("http://localhost:3001/api/project/" + projectID);
-            const dron = await axios.get('http://localhost:3001/api/project/drones/' + 1);
+            const dron = await axios.get('http://localhost:3001/api/project/drones/' + projectID);
             setDrones(dron.data.drones)
             setProject(proj.data.project)
+            console.log(proj.data.project)
             const my = proj.data.project;
             const pending = 100 - (my.initialDiseased + my.initialUnhealthy + my.initialHealthy)
             setDatapoints([my.initialDiseased,my.initialUnhealthy,my.initialHealthy,pending])
@@ -80,56 +54,39 @@ const Dashboard = () => {
     return (
         <div className="dashboard">
             <Header />
-            <div className="main-container-dash">
-                <div className="side-info">
-                    <Drones
-                        drones={drones}
-                        setSelected={setSelected}
-                    />
-                    
+            {!loading &&
+                <div className='project-basic'>
+                    <span className='client'>{project.client.name}</span>
+                    <span className='client'>{project.surveyName}</span>
+                    <span className='client'>{project.client.name}</span>
                 </div>
-                <div className="main-content">
-                    <Container>
-                        <Row>
-                            <Col sm={6} lg={6} xl={6} md={6}>
-                                <div className="salient-info">
-                                    {!loading &&
-                                    <div className="stage">
-                                        <h1>Stage 1: Initial Survey</h1>
-                                        <span><ProgressBar className="stage-progress"  variant="success" animated now={34} label={`34%`} /></span>
-                                        <div className="hold-graph">
-                                            <Doughnut data={data} />
-                                        </div>
-                                    </div>
-                                    }
-                                    
-                                    {!loading &&
-                                        <div className='drone-info'>
-                                            <h2>ID: {drones[selected].id}</h2>
-                                            <span>Type: {drones[selected].type}</span>
-                                            <h3>Task: {drones[selected].task.name}</h3>
-                                            <p>{drones[selected].task.desc}</p>
-                                            <h4>Progress</h4>
-                                            <span>Estimate Time Remaining: <strong>4 minutes</strong></span>
-                                            <span><ProgressBar className="task-progress" animated now={drones[selected].task.progress} label={`${drones[selected].task.progress}%`} /></span>
-                                        </div>
-                                    }
-                                </div>
-                                
-                            </Col>
-                            <Col sm={6} lg={6} xl={6} md={6}>
-                                {/* <Map drones={drones} selected={selected} /> */}
-                                {!loading && <PathMap 
-                                
-                                project={project}
-                                drones={drones}
-                                selected={selected}
-                                />}
-                            </Col>
-                        </Row>
-                    </Container>
-                </div>
-            </div>
+            }
+
+        {!loading && (() => {
+                switch (project.stage) {
+                case 'Stage 0':
+                    return (
+                        <Stage0
+                            drones={drones}
+                            data={data}
+                            project={project}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />)
+                case 'Stage 1':
+                    return (
+                        <Stage1 
+                            drones={drones}
+                            data={data}
+                            project={project}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />)
+                default:
+                    return null
+                }
+            })()}
+
         </div>
     )
 }

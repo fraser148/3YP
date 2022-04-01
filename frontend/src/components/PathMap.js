@@ -84,7 +84,7 @@ const Map = ({project, drones, selected}) => {
                 yesIWantToUseGoogleMapApiInternals
                 onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, flightPath, boundaryPath)}
             >                
-                {drones.map((drone, index) => (
+                {drones.length && drones.map((drone, index) => (
                     <AnyReactComponent
                         key={index}
                         lat={drone.location.lat}

@@ -257,6 +257,10 @@ $content-width: 1400px;
     .projects {
       text-align: center;
 
+      h3 {
+        margin-top: 30px;
+      }
+
       .create {
         display: inline-block;
         padding: 10px 16px;

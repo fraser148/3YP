@@ -61,7 +61,12 @@ db.sequelize.sync({force: true}).then(() => {
 
 function initial() {
   DroneType.bulkCreate([
-    {type: "Small Sprayer"},{type: "Large Surveyor"}
+    {type: "Small Sprayer"},
+    {type: "Large Surveyor",
+    name: "P4 Miltispectral",
+    url: "./A700000008264657.pdf",
+    maxSpeed: 50,
+    flightTime: 27}
   ])
   .then(() => {
     Client.bulkCreate([{
@@ -102,20 +107,18 @@ function initial() {
       {
         id: "D080",
         battery: 89,
-        type: "Small Sprayer",
-        allocation: 1
+        type: "Large Surveyor",
     })
     Drone.create(
       {
-        id: "D079",
+        id: "SUR079",
         battery: 43,
         type: "Large Surveyor",
-        allocation: 1
     }).then(() => {
       Location.bulkCreate([{
         lat: 51.75362988741313,
         lng: -1.2554607810413971,
-        droneId: "D079"
+        droneId: "SUR079"
       },{
         lat: 51.75432645683681,
         lng: -1.2556660471340908,
@@ -130,7 +133,7 @@ function initial() {
   })
   .then(() => {
     Task.create({
-      droneId: "D080",
+      droneId: "SUR079",
       name: "Initial Survey",
       desc: "Drone 2 of 4 completing the survey",
       isActive: true,
@@ -139,7 +142,7 @@ function initial() {
   })
   .then(()=> {
     Task.create({
-      droneId: "D079",
+      droneId: "D080",
       name: "Spraying some shiz",
       desc: "Spraying crops that are showing signs of mildew",
       isActive: true,
