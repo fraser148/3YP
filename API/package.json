@@ -13,12 +13,12 @@
     "mysql2": "^2.3.3",
     "ncu": "^0.2.1",
     "nodemon": "^2.0.15",
+    "puppeteer": "^13.5.2",
     "query-string": "^7.1.1",
     "sequelize": "^6.17.0",
     "socket.io": "^4.4.1",
     "ws": "^8.5.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",

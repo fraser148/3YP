@@ -8,6 +8,7 @@ import Survey from './Survey';
 import Projects from './Projects';
 import Home from './Home';
 import NotFound from './NotFound';
+import Report from './Report';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />}/>
         <Route path="/dashboard" element={<Projects />}/>
         <Route path="/dashboard/project/:id" element={<Dashboard />}/>
+        <Route path="/report/project/:id" element={<Report />}/>
         <Route path="/topography" element={<Topography />}/>
         <Route path="/plan/*" element={<Plan/>}/>
         <Route path="/survey" element={<Survey />}/>

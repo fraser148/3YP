@@ -1,7 +1,6 @@
 import db from "../models/index.js";
 import child_process from "child_process";
-import { connect } from "http2";
-import { Console } from "console";
+import puppeteer from 'puppeteer';
 const spawn = child_process.spawn
 
 const Location = db.location;
@@ -273,6 +272,17 @@ const startProject = async (req, res) => {
     }
 }
 
+const generateReport = async (req, res) => {
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+    await page.goto('http://localhost:3000/report/project/2', {waitUntil: 'networkidle0'});
+    const pdf = await page.pdf({ format: 'A4' });
+    
+    await browser.close();
+    res.set({ 'Content-Type': 'application/pdf', 'Content-Length': pdf.length })
+    res.send(pdf)
+}
+
 export default {
     getSetup,
     getAvailable,
@@ -281,5 +291,6 @@ export default {
     getClients,
     getClientProjects,
     getClient,
-    startProject
+    startProject,
+    generateReport
 }
