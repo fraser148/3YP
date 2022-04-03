@@ -1,6 +1,8 @@
 import db from "../models/index.js";
 import child_process from "child_process";
 import puppeteer from 'puppeteer';
+import axios from 'axios';
+
 const spawn = child_process.spawn
 
 const Location = db.location;
@@ -191,32 +193,38 @@ const getRoute = async (req, res) => {
         const unit = calcUnit(center);
         const ox = String(req.body.xs);
         const oy = String(req.body.ys);
-        const output = await run(ox,oy);
-        let py, px;
-        if (output.length < 2) {
-            let outter = output[0].split('\r\n');
-            const coords = [];
-            outter.forEach(element => {
-                if (element.length > 50) {
-                    coords.push(element);
-                } 
-            });
-            let str = coords[0];
-            px = str.substring(
-                str.indexOf("[") + 1,
-                str.lastIndexOf("]")
-            );
-            py = coords[1];
-        } else {
-            let str = output[0];
-            px = str.substring(
-                str.indexOf("[") + 1,
-                str.lastIndexOf("]")
-            );
-            py = output[1];
-        }
-        px = px.match(/-?\d+(?:\.\d+)?/g).map(Number);
-        py = py.match(/-?\d+(?:\.\d+)?/g).map(Number);
+
+        const newout = await axios.post("http://localhost:5000/", {"ox": req.body.xs, "oy": req.body.ys});
+        console.log(newout.data);
+
+        // const output = await run(ox,oy);
+        // let py, px;
+        // if (output.length < 2) {
+        //     let outter = output[0].split('\r\n');
+        //     const coords = [];
+        //     outter.forEach(element => {
+        //         if (element.length > 50) {
+        //             coords.push(element);
+        //         } 
+        //     });
+        //     let str = coords[0];
+        //     px = str.substring(
+        //         str.indexOf("[") + 1,
+        //         str.lastIndexOf("]")
+        //     );
+        //     py = coords[1];
+        // } else {
+        //     let str = output[0];
+        //     px = str.substring(
+        //         str.indexOf("[") + 1,
+        //         str.lastIndexOf("]")
+        //     );
+        //     py = output[1];
+        // }
+        // px = px.match(/-?\d+(?:\.\d+)?/g).map(Number);
+        // py = py.match(/-?\d+(?:\.\d+)?/g).map(Number);
+        const px = newout.data.px
+        const py = newout.data.py
         const points = [];
         const distances = [];
         const coords = [];
