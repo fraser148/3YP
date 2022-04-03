@@ -5,6 +5,7 @@ const Project = db.project;
 const Drone = db.drone;
 const Task = db.task;
 const Client = db.client;
+const Type = db.droneType;
 
 const sendLocation = (req, res) => {
     Location.findOne({
@@ -79,8 +80,19 @@ const getProject = (req, res) => {
     });
 }
 
+const getType = async (req, res) => {
+    try {
+        const { type } = req.params;
+        const myType = await Type.findOne({ where: { type } });
+        res.status(200).send({type: myType})
+    } catch(err) {
+        res.status(500).send({message: err});
+    }
+}
+
 export default {
     sendLocation,
     sendDrones,
-    getProject
+    getProject,
+    getType
 }

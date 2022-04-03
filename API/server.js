@@ -63,8 +63,9 @@ function initial() {
   DroneType.bulkCreate([
     {type: "Small Sprayer"},
     {type: "Large Surveyor",
-    name: "P4 Miltispectral",
+    name: "P4 Multispectral",
     url: "./A700000008264657.pdf",
+    image: "p4-multispectral.png",
     maxSpeed: 50,
     flightTime: 27}
   ])

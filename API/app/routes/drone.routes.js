@@ -12,6 +12,7 @@ const DroneRoutes = (app) => {
   app.get("/api/drone/location/:id", controller.sendLocation);
   app.get("/api/project/drones/:project", controller.sendDrones);
   app.get("/api/project/:project", controller.getProject);
+  app.get("/api/drone/type/:type", controller.getType);
 
 };
 

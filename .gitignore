@@ -25,3 +25,10 @@ yarn-error.log*
 
 API/node_modules
 API/passes.txt
+
+
+pathAPI/Lib
+pathAPI/Scripts
+pathAPI/venv
+pathAPI/Include
+pathAPI/pyvenv.cfg

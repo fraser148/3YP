@@ -13,6 +13,18 @@ const Dashboard = () => {
     const [datapoints, setDatapoints] = useState();
     let { id } = useParams();
 
+    const formatDate = (date) => {
+        return new Date(date).toLocaleDateString(
+            'en-gb',
+            {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              timeZone: 'utc'
+            }
+        ); 
+    }
+
     useEffect(() => {
         const getProject = async (projectID) => {
             const proj = await axios.get("http://localhost:3001/api/project/" + projectID);
@@ -58,7 +70,7 @@ const Dashboard = () => {
                 <div className='project-basic'>
                     <span className='client'>{project.client.name}</span>
                     <span className='client'>{project.surveyName}</span>
-                    <span className='client'>{project.client.name}</span>
+                    <span className='client'>{formatDate(project.startDate)}</span>
                 </div>
             }
 

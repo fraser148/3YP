@@ -9,6 +9,9 @@ const DroneType = (sequelize, Sequelize) => sequelize.define("drone_types", {
     url:{
         type: Sequelize.STRING
     },
+    image: {
+        type: Sequelize.STRING
+    },
     maxSpeed: {
         type: Sequelize.FLOAT
     },

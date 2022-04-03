@@ -9,6 +9,7 @@ import Projects from './Projects';
 import Home from './Home';
 import NotFound from './NotFound';
 import Report from './Report';
+import DroneType from './DroneType';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/topography" element={<Topography />}/>
         <Route path="/plan/*" element={<Plan/>}/>
         <Route path="/survey" element={<Survey />}/>
+        <Route path="/drone/type/:typeID" element={<DroneType />}/>
       </Routes>
     </div>
   );
