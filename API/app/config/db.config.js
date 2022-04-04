@@ -1,17 +1,20 @@
 const Config2 = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: "",
-    DB: "viti",
-    dialect: "mysql",
-  };
+  HOST: "localhost",
+  USER: "root",
+  PASSWORD: "",
+  DB: "viti",
+  dialect: "mysql",
+};
+
+import dotenv from "dotenv";
+dotenv.config();
 
 const Config = {
-    HOST: "185.199.220.27",
-    USER: "projec11_viti",
-    PASSWORD: "jO8y&gYuw,VO",
-    DB: "projec11_viti",
-    dialect: "mysql",
-  };
+  HOST: process.env.HOST,
+  USER: process.env.USER,
+  PASSWORD: process.env.PASSWORD,
+  DB: process.env.DB,
+  dialect: "mysql",
+};
 
 export default Config

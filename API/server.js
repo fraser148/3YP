@@ -10,7 +10,7 @@ import ProjectRoutes  from './app/routes/project.routes.js';
 import websockets     from './websockets/index.js';
 
 const app           = express()
-const port = 3001
+const port = process.env.PORT || 3001;
 
 const server = http.createServer(app)
 const io = new Server(server, {
@@ -53,11 +53,11 @@ const Client = db.client;
 const Project = db.project;
 const Task = db.task;
 
-db.sequelize.sync({force: true}).then(() => {
-  console.log('Drop and Resync Db');
-  initial()
-})
-// db.sequelize.sync()
+// db.sequelize.sync({force: true}).then(() => {
+//   console.log('Drop and Resync Db');
+//   initial()
+// })
+db.sequelize.sync()
 
 function initial() {
   DroneType.bulkCreate([
@@ -158,6 +158,10 @@ function initial() {
 
 DroneRoutes(app);
 ProjectRoutes(app);
+
+app.get('/', (req, res) => {
+  res.send('Hello from App Engine!');
+});
 
 const server2 = app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

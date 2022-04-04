@@ -12,7 +12,7 @@ const Projects = () => {
 
     useEffect(() => {
         const getClients = async () => {
-            const clie = await axios.get("http://localhost:3001/api/clients");
+            const clie = await axios.get("https://viti-332822.nw.r.appspot.com/api/clients");
             setClients(clie.data.clients)
             console.log(clie.data.clients);
             setLoading(false);
@@ -29,7 +29,7 @@ const Projects = () => {
         console.log(e.target.value);
         const c = e.target.value
         setClient(c);
-        const myClients = await axios.get("http://localhost:3001/api/client/projects/" + c);
+        const myClients = await axios.get("https://viti-332822.nw.r.appspot.com/api/client/projects/" + c);
         console.log(myClients.data);
         setProjects(myClients.data.projects);
     }

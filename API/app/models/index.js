@@ -5,7 +5,7 @@ import Drone from "../models/drone.model.js";
 import Project from "../models/project.model.js";
 import Client from "../models/client.model.js";
 import Task from "../models/task.model.js";
-import Sequelize from "Sequelize";
+import Sequelize from "sequelize";
 
 // Connect to database
 const sequelize = new Sequelize(

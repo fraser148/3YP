@@ -25,6 +25,10 @@ yarn-error.log*
 
 API/node_modules
 API/passes.txt
+API/.env
+API/.gcloudignore
+API/app.yaml
+API/my_file.pdf
 
 
 pathAPI/Lib

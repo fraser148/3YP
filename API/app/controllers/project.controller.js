@@ -36,7 +36,7 @@ const getAvailable = async (req, res) => {
         console.log(drones)
         res.status(200).send({drones});
     } catch(err) {
-        res.status(500).send("Ayo something has gone wrong with the count")
+        res.status(500).send({err})
     }
 }
 
