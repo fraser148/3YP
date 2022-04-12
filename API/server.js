@@ -71,12 +71,12 @@ function initial() {
   ])
   .then(() => {
     Client.bulkCreate([{
-      name: "Jon Farms",
+      name: "John Farms",
       address1: "Exeter College",
       address2: "Turl Street",
       country: "United Kingdom",
-      postcode: "OX1 4HG",
-      email: "fraser.rennie@exeter.ox.ac.uk",
+      postcode: "OX1 3DP",
+      email: "john.smith@exeter.ox.ac.uk",
       client_lat: 51.75377600289503,
       client_lng: -1.2560615958119348
     },{

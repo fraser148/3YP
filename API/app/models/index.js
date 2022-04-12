@@ -5,7 +5,7 @@ import Drone from "../models/drone.model.js";
 import Project from "../models/project.model.js";
 import Client from "../models/client.model.js";
 import Task from "../models/task.model.js";
-import Sequelize from "sequelize";
+import Sequelize from "Sequelize";
 
 // Connect to database
 const sequelize = new Sequelize(
@@ -17,8 +17,15 @@ const sequelize = new Sequelize(
     dialect: config.dialect,
     // operatorsAliases: false
   }
-);
+)
 
+sequelize.authenticate()
+.then(() => {
+  console.log('Connection has been established successfully.');
+})
+.catch(err => {
+  console.error('Unable to connect to the database:', err);
+});
 const db = {};
 
 db.Sequelize = Sequelize;
